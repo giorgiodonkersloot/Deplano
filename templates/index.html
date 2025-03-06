@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -7,11 +8,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <style>
-         html, body {
+        html, body {
             margin: 0;
             padding: 0;
             min-height: 100%;
-            /* Evita che il background si ripeta */
             background-repeat: no-repeat;
         }
         body {
@@ -23,7 +23,7 @@
             background: linear-gradient(45deg, #080742, #2d0f7e, #8735f3, #ae31b3, #c447c9);
             background-size: cover;
             background-attachment: fixed;
-            text-align: center; /* Centra il testo */
+            text-align: center;
         }
         .container {
             text-align: center;
@@ -66,30 +66,22 @@
         button:hover {
             background-color: #45a049;
         }
-        #map { 
-            height: 500px;
-            width: 100%;
-        }
-        h1 {
-            color: rgb(0, 0, 0); /* Cambia il colore del titolo */
-            font-size: 36px; /* Cambia la dimensione del testo */
-        }
-        p {
-            font-size: 25px; 
-            color: rgb(0, 0, 0); 
-        }
-        /* Stili per la slideshow */
+        /* Slideshow: container con altezza fissa */
         .slideshow-container {
             position: relative;
             max-width: 100%;
-            margin: auto;
-            margin-bottom: 20px;
+            margin: 20px auto;
+            height: 300px; /* Altezza fissa */
+            overflow: hidden;
         }
         .mySlides {
             display: none;
+            height: 100%;
         }
         .mySlides img {
             width: 100%;
+            height: 100%;
+            object-fit: cover; /* L'immagine si adatta al container, eventuale ritaglio */
             border-radius: 10px;
         }
         .fade {
@@ -106,23 +98,32 @@
             from {opacity: .4} 
             to {opacity: 1}
         }
+        /* Mappa */
+        #map { 
+            height: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #000;
+            font-size: 36px;
+        }
+        p {
+            font-size: 25px;
+            color: #000;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-       
         <h1>
             Benvenuto su Deplano<br>
-            <small style="font-size: 25px;"> Hey! teacher! don't do it alone!</small>
+            <small style="font-size: 25px;">Hey! teacher! don't do it alone!</small>
         </h1>
-          
         <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo Deplano" width="500">
         <br><br>
-         <!-- Sezione per account: Login e Registrazione -->
-         <div style="background-color: yellow; color: black; border: 2px solid orange; padding: 15px; margin: 20px 0; font-size: 20px; font-weight: bold; text-align: center;">
+        <div style="background-color: yellow; color: black; border: 2px solid orange; padding: 15px; margin: 20px 0; font-size: 20px; font-weight: bold; text-align: center;">
             Attenzione: Prossimamente sul sito sarà disponibile la possibilità di creare un account! Al momento i pulsanti "Accedi" e "Registrati" non funzionano
-         </div>
-
+        </div>
         <button onclick="window.location.href='/survey'">Trova la destinazione in Europa</button>
         <button onclick="window.location.href='/localsurvey'">Trova la destinazione Locale</button>
         <br><br/>
@@ -132,10 +133,66 @@
             <button onclick="window.location.href='/about'">About Us</button>
             <button onclick="window.location.href='/contact'">Contattaci</button>
         </div>
+        
+        <!-- Slideshow (rimane prima della mappa) -->
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='milano1.jpg') }}" alt="Milano 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='Nantes1.jpg') }}" alt="Antes 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='Nantes2.jpg') }}" alt="Antes 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='strasburgo1.jpg') }}" alt="Strasburgo 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='tolosa2.jpg') }}" alt="Tolosa 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='utrecht2.jpg') }}" alt="Utrecht 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='ajaccio1.jpg') }}" alt="Ajaccio 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='ajaccio2.jpg') }}" alt="Ajaccio 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='bordeaux1.jpg') }}" alt="Bordeaux 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='bordeaux2.jpg') }}" alt="Bordeaux 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='carcassonne2.jpg') }}" alt="Carcassonne 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='lille1.jpg') }}" alt="Lille 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='lione1.jpg') }}" alt="Lione 1">
+            </div>
+        </div>
+        <script>
+             var slideIndex = 0;
+             showSlides();
+             function showSlides() {
+                 var i;
+                 var slides = document.getElementsByClassName("mySlides");
+                 for (i = 0; i < slides.length; i++) {
+                     slides[i].style.display = "none";  
+                 }
+                 slideIndex++;
+                 if (slideIndex > slides.length) {slideIndex = 1}    
+                 slides[slideIndex-1].style.display = "block";  
+                 setTimeout(showSlides, 3000); // Cambia immagine ogni 3 secondi
+             }
+        </script>
 
-        <!-- Sezione Slideshow -->
-       
-
+        <!-- Mappa Interattiva -->
         <h2>Mappa Interattiva</h2>
         <div id="map"></div>
         <script>
@@ -143,12 +200,10 @@
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
-            // Esempio: aggiungi un marker per Milano
+            // Marker di esempio per Milano
             var marker = L.marker([45.184725, 9.158207]).addTo(map)
                 .bindPopup("<b>Pavia, sede centrale Deplano</b><br><a href='/destination/Pavia'>Vai alla destinazione Pavia</a>")
                 .openPopup();
-                
-            // Altri marker possono essere aggiunti qui...
             var markerRoma = L.marker([41.9028, 12.4964]).addTo(map)
                 .bindPopup("<b>Roma</b><br><a href='/destination/Roma'>Vai alla destinazione Roma</a>");
             var markerCERN = L.marker([46.233832398, 6.053166454]).addTo(map)
@@ -226,75 +281,6 @@
                 .bindPopup("<b>xxxxxxxx</b><br><a href='/destination/xxxxxxxx'>Vai alla destinazione xxxxxxxx</a>");
         </script>
     </div>
-    <div class="slideshow-container">
-        <!-- Marsiglia -->
-        
-        <!-- Milano -->
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='milano1.jpg') }}" alt="Milano 1">
-        </div>
-        <!-- Antes -->
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='Nantes1.jpg') }}" alt="Antes 1">
-        </div>
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='Nantes2.jpg') }}" alt="Antes 2">
-        </div>
-        <!-- Strasburgo -->
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='strasburgo1.jpg') }}" alt="Strasburgo 1">
-        </div>
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='tolosa2.jpg') }}" alt="Tolosa 2">
-        </div>
-        <!-- Utrecht -->
-       
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='utrecht2.jpg') }}" alt="Utrecht 2">
-        </div>
-        <!-- Ajaccio -->
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='ajaccio1.jpg') }}" alt="Ajaccio 1">
-        </div>
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='ajaccio2.jpg') }}" alt="Ajaccio 2">
-        </div>
-        <!-- Amsterdam -->
-        <!-- Bordeaux -->
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='bordeaux1.jpg') }}" alt="Bordeaux 1">
-        </div>
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='bordeaux2.jpg') }}" alt="Bordeaux 2">
-        </div>
-        <!-- Carcassonne -->
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='carcassonne2.jpg') }}" alt="Carcassonne 2">
-        </div>
-        <!-- Lille -->
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='lille1.jpg') }}" alt="Lille 1">
-        </div>
-
-        <!-- Lione -->
-        <div class="mySlides fade">
-            <img src="{{ url_for('static', filename='lione1.jpg') }}" alt="Lione 1">
-        </div>
-
-    <script>
-        var slideIndex = 0;
-        showSlides();
-        function showSlides() {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
-            setTimeout(showSlides, 3000); // Cambia immagine ogni 3 secondi
-        }
-    </script>
 </body>
 </html>
+
