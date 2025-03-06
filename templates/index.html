@@ -38,9 +38,9 @@
             margin-bottom: 20px;
         }
         .account-buttons button {
-            width: 210px;
-            height: 70px;
-            font-size: 18px;
+            width: 180px;
+            height: 50px;
+            font-size: 16px;
             background-color: #007BFF;
             color: white;
             border: none;
@@ -84,23 +84,27 @@
     <div class="container">
        
         <h1>
-            Benvenuto su Deplano!<br>
+            Benvenuto su Deplano<br>
             <small style="font-size: 25px;"> Hey! teacher! don't do it alone!</small>
         </h1>
           
         <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Descrizione dell'immagine" width="500">
         <br></br>
          <!-- Sezione per account: Login e Registrazione -->
-         <div class="account-buttons">
-            <button onclick="window.location.href='/login'">Accedi</button>
-            <button onclick="window.location.href='/register'">Registrati</button>
-        </div>
-        
+         
+         <div style="background-color: yellow; color: black; border: 2px solid orange; padding: 15px; margin: 20px 0; font-size: 20px; font-weight: bold; text-align: center;">
+            Attenzione: Prossimamente sul sito sarà disponibile la possibilità di creare un account! Al momento i pulsanti "Accedi" e "Registrati"
+          </div>
+
         <button onclick="window.location.href='/survey'">Trova la destinazione in Europa</button>
         <button onclick="window.location.href='/localsurvey'">Trova la destinazione Locale</button>
+       <br><br/>
+       <div class="account-buttons">
+        <button onclick="window.location.href='/login'">Accedi</button>
+        <button onclick="window.location.href='/register'">Registrati</button>
         <button onclick="window.location.href='/about'">About Us</button>
         <button onclick="window.location.href='/contact'">Contattaci</button>
-
+    </div>
         <h2>Mappa Interattiva</h2>
         <div id="map"></div>
         <script>
