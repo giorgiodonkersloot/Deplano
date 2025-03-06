@@ -2,36 +2,31 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <!-- Puoi includere qui i tuoi stili CSS o un framework come Bootstrap -->
+    <title>Dashboard - Impostazioni Account</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-4">
-        <h1>Grazie per esserti iscritto/a!</h1>
-        <p>Da oggi pianificare gite sarà più semplice!</p>
-        
-        <!-- Esempio di utilizzo di variabili Jinja2 -->
+        <h1>Impostazioni Account</h1>
         {% if current_user.is_authenticated %}
             <p>Ciao, {{ current_user.username }}!</p>
+            <p>Email: {{ current_user.email }}</p>
+            <p>
+                Newsletter: 
+                {% if current_user.newsletter %}
+                    <strong>Iscritto</strong>
+                {% else %}
+                    <strong>Non iscritto</strong>
+                {% endif %}
+            </p>
+            <!-- Pulsanti per modificare l'iscrizione alla newsletter, eliminare account, fare logout, ecc. -->
+            <a href="{{ url_for('logout') }}" class="btn btn-danger mt-3">Logout</a>
         {% else %}
             <p>Non sei autenticato. <a href="{{ url_for('login') }}">Accedi</a> per continuare.</p>
         {% endif %}
-        
-        <!-- Sezione per eventuali contenuti aggiuntivi -->
-        <div>
-            <h2>Le tue informazioni</h2>
-            <p>Qui puoi inserire dati e funzionalità riservate agli utenti autenticati.</p>
-        </div>
-        
-        <!-- Pulsante di logout -->
-        <a href="{{ url_for('logout') }}" class="btn btn-danger mt-3">Logout</a>
+        <br><br/>
+        <button onclick="window.location.href='/'" class="btn btn-secondary">Indietro</button>
     </div>
-    
-    <!-- Eventuale script JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<br><br/>
-    <button onclick="window.location.href='/'">Indietro</button>
-
 </body>
 </html>
