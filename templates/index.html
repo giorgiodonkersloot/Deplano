@@ -78,6 +78,34 @@
             font-size: 25px; 
             color: rgb(0, 0, 0); 
         }
+        /* Stili per la slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+        .mySlides {
+            display: none;
+        }
+        .mySlides img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @-webkit-keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
     </style>
 </head>
 <body>
@@ -88,23 +116,155 @@
             <small style="font-size: 25px;"> Hey! teacher! don't do it alone!</small>
         </h1>
           
-        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Descrizione dell'immagine" width="500">
-        <br></br>
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo Deplano" width="500">
+        <br><br>
          <!-- Sezione per account: Login e Registrazione -->
-         
          <div style="background-color: yellow; color: black; border: 2px solid orange; padding: 15px; margin: 20px 0; font-size: 20px; font-weight: bold; text-align: center;">
             Attenzione: Prossimamente sul sito sarà disponibile la possibilità di creare un account! Al momento i pulsanti "Accedi" e "Registrati" non funzionano
-          </div>
+         </div>
 
         <button onclick="window.location.href='/survey'">Trova la destinazione in Europa</button>
         <button onclick="window.location.href='/localsurvey'">Trova la destinazione Locale</button>
-       <br><br/>
-       <div class="account-buttons">
-        <button onclick="window.location.href='/login'">Accedi</button>
-        <button onclick="window.location.href='/register'">Registrati</button>
-        <button onclick="window.location.href='/about'">About Us</button>
-        <button onclick="window.location.href='/contact'">Contattaci</button>
-    </div>
+        <br><br/>
+        <div class="account-buttons">
+            <button onclick="window.location.href='/login'">Accedi</button>
+            <button onclick="window.location.href='/register'">Registrati</button>
+            <button onclick="window.location.href='/about'">About Us</button>
+            <button onclick="window.location.href='/contact'">Contattaci</button>
+        </div>
+
+        <!-- Sezione Slideshow -->
+        <div class="slideshow-container">
+            <!-- Marsiglia -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='marsiglia1.jpg') }}" alt="Marsiglia 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='marsiglia2.jpg') }}" alt="Marsiglia 2">
+            </div>
+            <!-- Milano -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='milano1.jpg') }}" alt="Milano 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='milano2.jpg') }}" alt="Milano 2">
+            </div>
+            <!-- Montpellier -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='montpellier1.jpg') }}" alt="Montpellier 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='montpellier2.jpg') }}" alt="Montpellier 2">
+            </div>
+            <!-- Antes -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='antes1.jpg') }}" alt="Antes 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='antes2.jpg') }}" alt="Antes 2">
+            </div>
+            <!-- Nizza -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='nizza1.jpg') }}" alt="Nizza 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='nizza2.jpg') }}" alt="Nizza 2">
+            </div>
+            <!-- Parigi -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='parigi1.jpg') }}" alt="Parigi 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='parigi2.jpg') }}" alt="Parigi 2">
+            </div>
+            <!-- Roma -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='roma1.jpg') }}" alt="Roma 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='roma2.jpg') }}" alt="Roma 2">
+            </div>
+            <!-- Strasburgo -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='strasburgo1.jpg') }}" alt="Strasburgo 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='strasburgo2.jpg') }}" alt="Strasburgo 2">
+            </div>
+            <!-- Tolosa -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='tolosa1.jpg') }}" alt="Tolosa 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='tolosa2.jpg') }}" alt="Tolosa 2">
+            </div>
+            <!-- Utrecht -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='utrecht1.jpg') }}" alt="Utrecht 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='utrecht2.jpg') }}" alt="Utrecht 2">
+            </div>
+            <!-- Ajaccio -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='ajaccio1.jpg') }}" alt="Ajaccio 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='ajaccio2.jpg') }}" alt="Ajaccio 2">
+            </div>
+            <!-- Amsterdam -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='amsterdam1.jpg') }}" alt="Amsterdam 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='amsterdam2.jpg') }}" alt="Amsterdam 2">
+            </div>
+            <!-- Bordeaux -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='bordeaux1.jpg') }}" alt="Bordeaux 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='bordeaux2.jpg') }}" alt="Bordeaux 2">
+            </div>
+            <!-- Carcassonne -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='carcassonne1.jpg') }}" alt="Carcassonne 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='carcassonne2.jpg') }}" alt="Carcassonne 2">
+            </div>
+            <!-- Lille -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='lille1.jpg') }}" alt="Lille 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='lille2.jpg') }}" alt="Lille 2">
+            </div>
+            <!-- Lione -->
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='lione1.jpg') }}" alt="Lione 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="{{ url_for('static', filename='lione2.jpg') }}" alt="Lione 2">
+            </div>
+        </div>
+
+        <script>
+            var slideIndex = 0;
+            showSlides();
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";  
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {slideIndex = 1}    
+                slides[slideIndex-1].style.display = "block";  
+                setTimeout(showSlides, 3000); // Cambia immagine ogni 3 secondi
+            }
+        </script>
+
         <h2>Mappa Interattiva</h2>
         <div id="map"></div>
         <script>
@@ -144,8 +304,10 @@
                 .bindPopup("<b>Tolosa</b><br><a href='/destination/Tolosa'>Vai alla destinazione Tolosa</a>");
             var markerStrasburgo = L.marker([48.573405, 7.752111]).addTo(map)
                 .bindPopup("<b>Strasburgo</b><br><a href='/destination/Strasburgo'>Vai alla destinazione Strasburgo</a>");
-            var markerNantes = L.marker([47.218371, -1.553621]).addTo(map)
-                .bindPopup("<b>Nantes</b><br><a href='/destination/Nantes'>Vai alla destinazione Nantes</a>");
+            var markerUtrecht = L.marker([52.089126, 5.120968]).addTo(map)
+                .bindPopup("<b>Utrecht</b><br><a href='/destination/Utrecht'>Vai alla destinazione Utrecht</a>");
+            var markerAmsterdam = L.marker([52.370216, 4.895168]).addTo(map)
+                .bindPopup("<b>Amsterdam</b><br><a href='/destination/Amsterdam'>Vai alla destinazione Amsterdam</a>");
             var markerAjaccio = L.marker([41.919229, 8.738635]).addTo(map)
                 .bindPopup("<b>Ajaccio</b><br><a href='/destination/Ajaccio'>Vai alla destinazione Ajaccio</a>");
             var markerBerlino = L.marker([52.521467, 13.406539]).addTo(map)
@@ -164,9 +326,9 @@
                 .bindPopup("<b>Norimberga</b><br><a href='/destination/Norimberga'>Vai alla destinazione Norimberga</a>");
             var markerDresda = L.marker([51.05318632, 13.73992501]).addTo(map)
                 .bindPopup("<b>Dresda</b><br><a href='/destination/Dresda'>Vai alla destinazione Dresda</a>");
-            var markerAmsterdam = L.marker([52.370216, 4.895168]).addTo(map)
-                .bindPopup("<b>Amstardam</b><br><a href='/destination/Amsterdam'>Vai alla destinazione Amsterdam</a>");
-            var markerUtrecht = L.marker([52.089126, 5.120968]).addTo(map)
+            var markerAmsterdam2 = L.marker([52.370216, 4.895168]).addTo(map)
+                .bindPopup("<b>Amsterdam</b><br><a href='/destination/Amsterdam'>Vai alla destinazione Amsterdam</a>");
+            var markerUtrecht2 = L.marker([52.089126, 5.120968]).addTo(map)
                 .bindPopup("<b>Utrecht</b><br><a href='/destination/Utrecht'>Vai alla destinazione Utrecht</a>");
             var markerRotterdamAia = L.marker([51.980567, 4.397668]).addTo(map)
                 .bindPopup("<b>Rotterdam e Aia</b><br><a href='/destination/Rotterdam e Aia'>Vai alla destinazione Rotterdam e Aia</a>");
@@ -178,7 +340,7 @@
                 .bindPopup("<b>Newcastle</b><br><a href='/destination/Newcastle'>Vai alla destinazione Newcastle</a>");
             var markerBath = L.marker([51.3813864, -2.3596963]).addTo(map)
                 .bindPopup("<b>Bath</b><br><a href='/destination/Bath'>Vai alla destinazione Bath</a>");
-            var markerOxford = L.marker([51.75201315, -1.257726, -1.2578499]).addTo(map)
+            var markerOxford = L.marker([51.75201315, -1.257726]).addTo(map)
                 .bindPopup("<b>Oxford</b><br><a href='/destination/Oxford'>Vai alla destinazione Oxford</a>");
             var markerWindermere = L.marker([54.3794828, -2.9061994]).addTo(map)
                 .bindPopup("<b>Windermere</b><br><a href='/destination/Windermere'>Vai alla destinazione Windermere</a>");
