@@ -134,136 +134,7 @@
         </div>
 
         <!-- Sezione Slideshow -->
-        <div class="slideshow-container">
-            <!-- Marsiglia -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='marsiglia1.jpg') }}" alt="Marsiglia 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='marsiglia2.jpg') }}" alt="Marsiglia 2">
-            </div>
-            <!-- Milano -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='milano1.jpg') }}" alt="Milano 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='milano2.jpg') }}" alt="Milano 2">
-            </div>
-            <!-- Montpellier -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='montpellier1.jpg') }}" alt="Montpellier 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='montpellier2.jpg') }}" alt="Montpellier 2">
-            </div>
-            <!-- Antes -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='antes1.jpg') }}" alt="Antes 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='antes2.jpg') }}" alt="Antes 2">
-            </div>
-            <!-- Nizza -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='nizza1.jpg') }}" alt="Nizza 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='nizza2.jpg') }}" alt="Nizza 2">
-            </div>
-            <!-- Parigi -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='parigi1.jpg') }}" alt="Parigi 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='parigi2.jpg') }}" alt="Parigi 2">
-            </div>
-            <!-- Roma -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='roma1.jpg') }}" alt="Roma 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='roma2.jpg') }}" alt="Roma 2">
-            </div>
-            <!-- Strasburgo -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='strasburgo1.jpg') }}" alt="Strasburgo 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='strasburgo2.jpg') }}" alt="Strasburgo 2">
-            </div>
-            <!-- Tolosa -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='tolosa1.jpg') }}" alt="Tolosa 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='tolosa2.jpg') }}" alt="Tolosa 2">
-            </div>
-            <!-- Utrecht -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='utrecht1.jpg') }}" alt="Utrecht 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='utrecht2.jpg') }}" alt="Utrecht 2">
-            </div>
-            <!-- Ajaccio -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='ajaccio1.jpg') }}" alt="Ajaccio 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='ajaccio2.jpg') }}" alt="Ajaccio 2">
-            </div>
-            <!-- Amsterdam -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='amsterdam1.jpg') }}" alt="Amsterdam 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='amsterdam2.jpg') }}" alt="Amsterdam 2">
-            </div>
-            <!-- Bordeaux -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='bordeaux1.jpg') }}" alt="Bordeaux 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='bordeaux2.jpg') }}" alt="Bordeaux 2">
-            </div>
-            <!-- Carcassonne -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='carcassonne1.jpg') }}" alt="Carcassonne 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='carcassonne2.jpg') }}" alt="Carcassonne 2">
-            </div>
-            <!-- Lille -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='lille1.jpg') }}" alt="Lille 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='lille2.jpg') }}" alt="Lille 2">
-            </div>
-            <!-- Lione -->
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='lione1.jpg') }}" alt="Lione 1">
-            </div>
-            <div class="mySlides fade">
-                <img src="{{ url_for('static', filename='lione2.jpg') }}" alt="Lione 2">
-            </div>
-        </div>
-
-        <script>
-            var slideIndex = 0;
-            showSlides();
-            function showSlides() {
-                var i;
-                var slides = document.getElementsByClassName("mySlides");
-                for (i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";  
-                }
-                slideIndex++;
-                if (slideIndex > slides.length) {slideIndex = 1}    
-                slides[slideIndex-1].style.display = "block";  
-                setTimeout(showSlides, 3000); // Cambia immagine ogni 3 secondi
-            }
-        </script>
+       
 
         <h2>Mappa Interattiva</h2>
         <div id="map"></div>
@@ -355,5 +226,75 @@
                 .bindPopup("<b>xxxxxxxx</b><br><a href='/destination/xxxxxxxx'>Vai alla destinazione xxxxxxxx</a>");
         </script>
     </div>
+    <div class="slideshow-container">
+        <!-- Marsiglia -->
+        
+        <!-- Milano -->
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='milano1.jpg') }}" alt="Milano 1">
+        </div>
+        <!-- Antes -->
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='Nantes1.jpg') }}" alt="Antes 1">
+        </div>
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='Nantes2.jpg') }}" alt="Antes 2">
+        </div>
+        <!-- Strasburgo -->
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='strasburgo1.jpg') }}" alt="Strasburgo 1">
+        </div>
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='tolosa2.jpg') }}" alt="Tolosa 2">
+        </div>
+        <!-- Utrecht -->
+       
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='utrecht2.jpg') }}" alt="Utrecht 2">
+        </div>
+        <!-- Ajaccio -->
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='ajaccio1.jpg') }}" alt="Ajaccio 1">
+        </div>
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='ajaccio2.jpg') }}" alt="Ajaccio 2">
+        </div>
+        <!-- Amsterdam -->
+        <!-- Bordeaux -->
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='bordeaux1.jpg') }}" alt="Bordeaux 1">
+        </div>
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='bordeaux2.jpg') }}" alt="Bordeaux 2">
+        </div>
+        <!-- Carcassonne -->
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='carcassonne2.jpg') }}" alt="Carcassonne 2">
+        </div>
+        <!-- Lille -->
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='lille1.jpg') }}" alt="Lille 1">
+        </div>
+
+        <!-- Lione -->
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='lione1.jpg') }}" alt="Lione 1">
+        </div>
+
+    <script>
+        var slideIndex = 0;
+        showSlides();
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 3000); // Cambia immagine ogni 3 secondi
+        }
+    </script>
 </body>
 </html>
