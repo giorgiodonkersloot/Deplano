@@ -1,25 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import random
 import smtplib
-
-# Import per autenticazione e database
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 
 app = Flask(__name__)
 app.secret_key = 'ISA&Isa1221'  # Sostituisci con una chiave sicura
-
-# Configurazione database (usiamo SQLite per semplicità)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 db = SQLAlchemy(app)
 
-# Configurazione Flask-Login
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
+# Serializer per la verifica via email
+serializer = URLSafeTimedSerializer(app.secret_key)
 
 # ---------------------------
 # Modello Utente
@@ -30,6 +29,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
     newsletter = db.Column(db.Boolean, default=False)
+    is_verified = db.Column(db.Boolean, default=False)  # Campo per la verifica email
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -53,27 +53,80 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Accedi')
 
 # ---------------------------
-# Rotte per autenticazione
+# Funzioni per la verifica email
+# ---------------------------
+def generate_verification_token(email):
+    return serializer.dumps(email, salt='email-verify')
+
+def confirm_verification_token(token, expiration=3600):
+    try:
+        email = serializer.loads(token, salt='email-verify', max_age=expiration)
+    except (SignatureExpired, BadSignature):
+        return None
+    return email
+
+def send_verification_email(user_email):
+    token = generate_verification_token(user_email)
+    verify_url = url_for('verify_email', token=token, _external=True)
+    subject = "Verifica il tuo indirizzo email"
+    body = f"Per favore verifica il tuo indirizzo email cliccando sul seguente link:\n{verify_url}"
+    # Sostituisci con i dati reali per l'invio della email
+    sender_email = "your_email@gmail.com"
+    sender_password = "your_app_password"  # Password per l'app (non quella dell'account)
+    message = f"Subject: {subject}\n\n{body}"
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, user_email, message)
+        server.quit()
+    except Exception as e:
+        print("Errore nell'invio della email di verifica:", e)
+
+# ---------------------------
+# Rotte per l'autenticazione
 # ---------------------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        # Verifica se email o username sono già in uso
+        existing_user = User.query.filter((User.email == form.email.data) | (User.username == form.username.data)).first()
+        if existing_user:
+            flash("Email o Username già in uso.", "danger")
+            return redirect(url_for('register'))
         hashed_password = generate_password_hash(form.password.data)
         new_user = User(
             username=form.username.data,
             email=form.email.data,
             password=hashed_password,
-            newsletter=form.newsletter.data
+            newsletter=form.newsletter.data,
+            is_verified=False
         )
         db.session.add(new_user)
         db.session.commit()
-
-        # QUI: Puoi aggiungere la logica per inviare una notifica via email se l'utente si iscrive alla newsletter
-
-        flash("Registrazione avvenuta con successo! Ora puoi accedere.", "success")
+        send_verification_email(new_user.email)
+        flash("Registrazione avvenuta con successo! Controlla la tua email per verificare il tuo account.", "success")
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
+
+@app.route('/verify/<token>')
+def verify_email(token):
+    email = confirm_verification_token(token)
+    if not email:
+        flash("Il link di verifica non è valido o è scaduto.", "danger")
+        return redirect(url_for('login'))
+    user = User.query.filter_by(email=email).first()
+    if user:
+        if user.is_verified:
+            flash("Account già verificato. Puoi effettuare il login.", "info")
+        else:
+            user.is_verified = True
+            db.session.commit()
+            flash("Email verificata con successo! Ora puoi accedere al tuo account.", "success")
+    else:
+        flash("Account non trovato.", "danger")
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -81,6 +134,9 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and check_password_hash(user.password, form.password.data):
+            if not user.is_verified:
+                flash("Per favore verifica la tua email prima di effettuare il login.", "warning")
+                return redirect(url_for('login'))
             login_user(user, remember=form.remember.data)
             flash("Accesso effettuato con successo!", "success")
             return redirect(url_for('dashboard'))
@@ -100,10 +156,16 @@ def logout():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/account_settings')
+@login_required
+def account_settings():
+    return render_template('account_settings.html')
+
 # ---------------------------
-# Funzionalità esistenti (Sondaggi, Destinazioni, Contatti)
+# Rotte per funzionalità esistenti (Sondaggi, Destinazioni, Contatti, ecc.)
 # ---------------------------
-# Destinazioni con punteggi assegnati
+
+# Dizionario completo delle destinazioni
 destinations = {
     "Pavia": 0,
     "Milano": 0,
@@ -143,8 +205,8 @@ destinations = {
     "Toledo": 0,
     "Malaga": 0,
     # Inghilterra
-    "UNK": 0,
-    "UNK": 0,
+    "York": 0,
+    "Liverpool": 0,
     "UNK": 0,
     "UNK": 0,
     "UNK": 0,
@@ -307,11 +369,7 @@ def survey():
             session.pop('survey_answers', None)
             return redirect(url_for('destination', city=chosen_destination))
     current_question = questions[q_index]
-    return render_template('survey.html',
-                           question=current_question,
-                           q_index=q_index,
-                           total=len(questions),
-                           form_action="/survey")
+    return render_template('survey.html', question=current_question, q_index=q_index, total=len(questions), form_action="/survey")
 
 @app.route('/localsurvey', methods=['GET', 'POST'])
 def localsurvey():
@@ -324,13 +382,6 @@ def localsurvey():
         answers = session.get('local_survey_answers', [None] * len(local_questions))
         answers[current_index] = answer
         session['local_survey_answers'] = answers
-
-        # Debug: stampa chiavi disponibili e risposta ricevuta
-        available_keys = list(local_questions[current_index]["options"].keys())
-        print("Domanda:", local_questions[current_index]["question"])
-        print("Chiavi disponibili:", available_keys)
-        print("Risposta ricevuta:", repr(answer))
-
         if current_index < len(local_questions) - 1:
             return redirect(url_for('localsurvey', q=current_index + 1))
         else:
@@ -352,11 +403,7 @@ def localsurvey():
             session.pop('local_survey_answers', None)
             return redirect(url_for('destination', city=chosen_destination))
     current_question = local_questions[q_index]
-    return render_template('survey.html',
-                           question=current_question,
-                           q_index=q_index,
-                           total=len(local_questions),
-                           form_action="/localsurvey")
+    return render_template('survey.html', question=current_question, q_index=q_index, total=len(local_questions), form_action="/localsurvey")
 
 @app.route('/destination/<city>')
 def destination(city):
@@ -374,9 +421,7 @@ def contact():
         message = request.form.get("message")
         sender_email = "lavoro.knod@gmail.com"  # Email del mittente
         receiver_email = "depalano.cope@gmail.com"  # Email del destinatario
-
         email_body = f"Da: {name}\n\nEmail: {email}\n\nMessaggio:\n{message}"
-
         try:
             server = smtplib.SMTP("smtp.gmail.com", 587)
             server.starttls()
@@ -386,7 +431,6 @@ def contact():
             return "Email inviata con successo!"
         except Exception as e:
             return f"Errore nell'invio: {str(e)}"
-    
     return render_template('contact.html')
 
 if __name__ == '__main__':

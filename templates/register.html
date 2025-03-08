@@ -1,101 +1,34 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Registrazione</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(45deg, #080742, #2d0f7e, #8735f3, #ae31b3, #c447c9);
-      background-size: cover;
-      background-attachment: fixed;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .container {
-      background-color: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-    }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    form {
-      text-align: left;
-    }
-    label {
-      font-weight: bold;
-    }
-    input {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0 15px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background-color: #4CAF50;
-      color: white;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    .back-btn {
-      background-color: #007BFF;
-    }
-    .back-btn:hover {
-      background-color: #0056b3;
-    }
-    p {
-      margin-top: 15px;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Registrati</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Registrati</h1>
-    <form method="POST" action="{{ url_for('register') }}">
-      {{ form.hidden_tag() }}
-      <p>
-        {{ form.username.label }}<br>
-        {{ form.username() }}
-      </p>
-      <p>
-        {{ form.email.label }}<br>
-        {{ form.email() }}
-      </p>
-      <p>
-        {{ form.password.label }}<br>
-        {{ form.password() }}
-      </p>
-      <p>
-        {{ form.confirm_password.label }}<br>
-        {{ form.confirm_password() }}
-      </p>
-      <p>
-        {{ form.newsletter() }} {{ form.newsletter.label }}
-      </p>
-      <button type="submit">{{ form.submit.label }}</button>
+    <h2>Registrazione</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        <p>
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(size=32) }}
+        </p>
+        <p>
+            {{ form.newsletter() }} {{ form.newsletter.label }}
+        </p>
+        <p>{{ form.submit() }}</p>
     </form>
-    <p>Hai già un account? <a href="{{ url_for('login') }}">Accedi qui</a></p>
-    <button class="back-btn" type="button" onclick="window.history.back()">Torna indietro</button>
-  </div>
+    <p><a href="/">Torna alla Home</a></p>
 </body>
 </html>
