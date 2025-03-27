@@ -110,7 +110,7 @@ destinations = {
     "Roma": 0,
     "Napoli": 0,
     "Firenze": 0,
-    # Francia
+    # #Francia
     "Parigi": 0,
     "Nizza": 0,
     "Montpellier": 0,
@@ -145,14 +145,12 @@ destinations = {
     # Inghilterra
     "York": 0,
     "Liverpool": 0,
-    "UNK": 0,
-    "UNK": 0,
-    "UNK": 0,
-    "UNK": 0,
-    "UNK": 0,
-    "UNK": 0,
-    "UNK": 0,
-    "UNK": 0,
+    "Bath": 0,
+    "Oxford": 0,
+    "Londra": 0,
+    "Cambridge": 0,
+    "Manchester": 0,
+    "Brighton": 0,
     # Paesi Bassi
     "Amsterdam": 0,
     "Utrecht": 0,
@@ -179,7 +177,9 @@ destinations = {
     "Delfi": 0,
     "Zagabria": 0,
     "Lubiana": 0,
-    # LOCAL
+
+    
+    # LOCALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
     "Centro Storico": 0,
     "Mercato Locale": 0,
     "Parco Naturale": 0,

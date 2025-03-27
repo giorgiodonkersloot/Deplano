@@ -652,49 +652,33 @@
             <h3>Monumenti e attrazioni principali:</h3>
             <ul>
                 <li><b>China town</b> <p> Liverpool ha una grande popolazione multiculturale, di cui un'alta percentuale è cinese. La Chinatown di Liverpool è stata la prima ad essere fondata in Europa. Verso la fine degli anni '60 dell'Ottocento molti migranti cinesi arrivarono per la prima volta a Liverpool a seguito dell'impiego di marinai cinesi da parte della Blue Funnel Shipping Line, creando forti legami tra le città, Shanghai, Hong Kong e Liverpool.</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Le numerose cattedrali della città</b> <p>Tra i tanti luoghi che potete visitare nella città di Liverpool, non potete certo perdervi le due principali cattedrali della città: la gotica Cattedrale Anglicana di Liverpool e la più moderna Cattedrale Metropolitana di Cristo Re.</p></li>
+
 
             </ul>
 
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="900">
             <br>
-
-            <h3>Musei famosi:</h3>
-            <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-            </ul>
-            <br>
-
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
-            <h2>Costo stimato per 7 Giorni:</h2>
-            <p style="font-size: 20px;">€COST</p>
-            <br>
         {% endif %}
 
-        {% if city == "NAME" %}
-            <h2>NAME</h2>
-            <p style="font-size: 20px;">DESCRIPTION</p>
+        {% if city == "Bath" %}
+            <h2>Bath</h2>
+            <p style="font-size: 20px;">Un rifugio di benessere già dai tempi dei romani e resa elegante dall’architettura georgiana presente in ogni angolo: Bath è una città che ha tutto. Guardando il suo status di patrimonio mondiale dell’UNESCO, scoprirai una destinazione ricca di delizie culturali e gastronomiche.
+                Rema con la tua pagaia lungo il fiume Avon o fai un tour delle location di Bridgerton rese famose dalla serie di successo di Netflix: qualsiasi attività tu scelga, non ti mancherà l’avventura. Balla come più ti piace durante il più grande festival di musica e arte del mondo, Glastonbury, o scopri la vita attraverso gli occhi di un personaggio di un libro durante il festival annuale dedicato a Jane Austen, celebreremo i 250 anni dalla nascita dell’autore nel 2025. Dallo shopping e l’esplorazione delle terme romane, fino a tuffarti nelle acque ricche di minerali della piscina sul tetto della Thermae Bath Spa, questo è un posto da non perdere.
+                </p>
             
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
             <h3>Monumenti e attrazioni principali:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Le Terme Romane</b> <p>Uno dei punti salienti del tour è sicuramente la visita alle Terme Romane. Questo complesso di antiche piscine, bagni e saune risale al periodo romano ed è incredibilmente ben conservato.</p></li>
+                <li><b>Prior Park</b> <p>Per una pausa tranquilla dalla frenesia della città, fai una passeggiata nei Giardini di Prior Park. Questo splendido parco offre viste mozzafiato sulla città e sulle campagne circostanti.</p></li>
+                <li><b>Royal Crescent</b> <p>Una delle icone più riconoscibili della città, questo lungo edificio a forma di semicerchio è un bellissimo esempio di architettura georgiana.</p></li>
+                <li><b>Ponte di Pulteney</b> <p>Questo ponte pedonale attraversa il fiume Avon ed è uno dei quattro ponti al mondo con negozi lungo entrambi i lati. Ispirato proprio dai ponti italiani pieni di negozi come Ponte Vecchio e Ponte di Rialto durante i viaggi a Firenze e Venezia</p></li>
+                <li><b>Bath Abbey</b> <p>Questa maestosa abbazia gotica domina il centro della città ed è un luogo di culto importante e una meraviglia architettonica. Risalente al XII secolo, questa cattedrale gotica è rinomata per le vetrate colorate e la storia che vi è legata.</p></li>
                 <li><b>NAME</b> <p>LDESC</p></li>
 
             </ul>
@@ -704,37 +688,29 @@
 
             <h3>Musei famosi:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Il Roman Baths Museum</b> <p>Per una prospettiva più dettagliata sulle Terme Romane, da non perdere è anche il Roman Baths Museum. Questo museo offre una ricca esposizione di reperti archeologici, insieme a modelli e ricostruzioni che illustrano come funzionavano le terme nell’antichità.</p></li>
+                <li><b>Jane Austen Centre</b> <p>Bath è strettamente associata all’autrice Jane Austen, che visse nella città per cinque anni dal 1801 fino al 1806. Il centro dedicato a lei
+                    offre una panoramica sulla sua vita e il suo lavoro, con oggetti d’epoca e esposizioni interattive.
+                   </p></li>
             </ul>
             <br>
 
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
-            
-            <h2>Costo stimato per 7 Giorni:</h2>
-            <p style="font-size: 20px;">€COST</p>
-            <br>
+
         {% endif %}
 
-        {% if city == "NAME" %}
-            <h2>NAME</h2>
-            <p style="font-size: 20px;">DESCRIPTION</p>
+        {% if city == "Oxford" %}
+            <h2>Oxford</h2>
+            <p style="font-size: 20px;">A solo un’ora di treno da Londra, ti ritroverai nella città delle guglie sognanti. Oxford ne è piena zeppa. Casa per molti studenti da 800 anni, ospita l’università, i giardini botanici e i pub più antichi della Gran Bretagna. Ha più chiostri, guglie gotiche ed edifici storici di quanti tu possa pensare Aggiungi stradine acciottolate, canali e uno strano barchino lungo i suoi fiumi e otterrai una ricetta rubacuori. Sebbene sia piena di musei, biblioteche e gallerie, c’è di più in questa gemma oltre alla sua bellezza e al suo intelletto imponente.</p>
             
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
             <h3>Monumenti e attrazioni principali:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Christ Church </b> <p>Con la sua avvincente combinazione di architettura maestosa, patrimonio letterario e doppia identità come Hogwarts di Harry Potter, Christ Church attrae turisti in abbondanza</p></li>
+                <li><b>Castello e prigione di Oxford </b> <p>Oggi resta ben poco del castello di Oxford, costruito per Guglielmo il Conquistatore nel 1071 e in gran parte distrutto dopo la guerra civile inglese perché i realisti sconfitti lo avevano usato come prigione.</p></li>
+                <li><b>La Bodleian Library </b> <p>Si tratta della principale biblioteca di ricerca dell'Università di Oxford ed una delle più antiche biblioteche d'Europa. Con oltre 12 milioni di articoli, è la seconda biblioteca più grande della Gran Bretagna dopo la British Library.</p></li>
 
             </ul>
 
@@ -743,37 +719,30 @@
 
             <h3>Musei famosi:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Museo di storia naturale dell'Università di Oxford </b> <p>Ospitato in un glorioso edificio gotico vittoriano, con colonne in ghisa, capitelli intagliati a fiori e un imponente tetto in vetro, questo museo è una superba vetrina per alcune straordinarie esposizioni. Tra gli esemplari provenienti da tutto il mondo c'è un granchio ragno giapponese di 150 anni, ma sono i dinosauri a lasciare davvero a bocca aperta la folla.</p></li>
+                <li><b>Radcliffe camera</b> <p>Sicuramente il monumento più fotografato di Oxford, la Radcliffe Camera color sabbia-oro è una splendida biblioteca circolare molto luminosa.</p></li>
+                <li><b>All Souls College</b> <p>Uno dei college più ricchi di Oxford, l'All Souls fu fondato come centro di preghiera e apprendimento nel 1438. Gran parte della sua facciata risale a quell'epoca, mentre il più piccolo Front Quad è rimasto sostanzialmente invariato per cinque secoli.</p></li>
             </ul>
             <br>
 
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
-            <h2>Costo stimato per 7 Giorni:</h2>
-            <p style="font-size: 20px;">€COST</p>
-            <br>
         {% endif %}
 
-        {% if city == "NAME" %}
-            <h2>NAME</h2>
-            <p style="font-size: 20px;">DESCRIPTION</p>
+        {% if city == "Londra" %}
+            <h2>Londra</h2>
+            <p style="font-size: 20px;">Londra, la capitale del Regno Unito, è un concentrato di storia, cultura e modernità, con una varietà incredibile di attrazioni e luoghi da visitare. Dalle icone storiche come il Big Ben e Buckingham Palace, alla vivace scena culturale nei musei e teatri, Londra ha qualcosa per tutti. Puoi passeggiare lungo il Tamigi, fare un giro sul London Eye per ammirare il panorama della città, o scoprire la storia in uno dei suoi musei mondiali. Sia che tu stia cercando cultura, shopping o svago, Londra ti accoglierà con la sua energia inconfondibile.
+            </p>
             
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
             <h3>Monumenti e attrazioni principali:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Palazzo di Buckingham</b> <p>Residenza ufficiale della Regina, Buckingham Palace è una delle attrazioni più famose di Londra. La cerimonia del cambio della guardia è un’esperienza da non perdere, così come la visita ai giardini del palazzo in estate.</p></li>
+                <li><b>The Shard</b> <p>Se cerchi una vista mozzafiato su Londra, il The Shard è il posto giusto. Il grattacielo più alto della città offre un panorama a 360° sulla capitale, perfetto per una vista panoramica spettacolare.</p></li>
+                <li><b>Westminster Abbey</b> <p>Un altro capolavoro gotico, Westminster Abbey è il luogo di incoronazione dei monarchi britannici e una delle chiese più storiche del Regno Unito.</p></li>
+                <li><b>Covent Garden</b> <p>Per una dose di arte e divertimento, Covent Garden è il posto ideale. Qui troverai artisti di strada, negozi unici, caffè alla moda e ristoranti eleganti.</p></li>
 
             </ul>
 
@@ -782,38 +751,28 @@
 
             <h3>Musei famosi:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>British Museum</b> <p>Uno dei musei più importanti e conosciuti al mondo, il British Museum ospita una vastissima collezione di reperti provenienti da tutto il mondo. Tra le sue meraviglie, la Stele di Rosetta e le sculture del Partenone sono assolutamente imperdibili.</p></li>
+                <li><b>Torre di Londra</b> <p>La Torre di Londra è famosa per la sua storia come prigione e per essere la sede dei Gioielli della Corona. Passeggiando tra le mura della torre, si possono scoprire storie intriganti di prigionia, esecuzioni e potere monarchico.</p></li>
+                <li><b>National Gallery</b> <p>Situata a Trafalgar Square, la National Gallery ospita alcune delle opere d'arte più celebri al mondo, tra cui dipinti di Leonardo da Vinci, Vincent van Gogh e Rembrandt. Un must per gli amanti dell’arte.</p></li>
             </ul>
             <br>
 
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
-            
-            <h2>Costo stimato per 7 Giorni:</h2>
-            <p style="font-size: 20px;">€COST</p>
-            <br>
         {% endif %}
 
-        {% if city == "NAME" %}
-            <h2>NAME</h2>
-            <p style="font-size: 20px;">DESCRIPTION</p>
+        {% if city == "Cambridge" %}
+            <h2>Cambridge</h2>
+            <p style="font-size: 20px;">Cambridge è una città storica e culturale che ospita una delle università più antiche e prestigiose del mondo. Famosa per i suoi college, le strette viuzze e la bellezza dei suoi giardini, Cambridge è una meta ideale per chi cerca un’atmosfera accademica e una città ricca di storia. Puoi fare una passeggiata lungo il fiume Cam, praticare il "punting" (giro in barca), o esplorare i numerosi musei e gallerie d'arte.</p>
             
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
             <h3>Monumenti e attrazioni principali:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-
+                <li><b>Università di Cambridge</b> <p>La prestigiosa Università di Cambridge, con i suoi numerosi college, è uno dei luoghi più affascinanti della città. Ogni college ha la propria storia e architettura, e un tour ti permetterà di scoprire i segreti accademici di Cambridge.</p></li>
+                <li><b>King’s College Chapel</b> <p>Un’icona della città, la cappella di King’s College è un capolavoro dell'architettura gotica.</p></li>
+                <li><b>Botanic Garden</b> <p>Il Giardino Botanico di Cambridge è un'oasi di tranquillità, con oltre 8.000 specie di piante da tutto il mondo. Perfetto per una passeggiata rilassante o un picnic.</p></li>
+                <li><b>Punting sul fiume Cam</b> <p>Un’attività tradizionale di Cambridge, il punting consiste nel navigare sul fiume Cam su una piccola barca a remi, che ti permetterà di ammirare i colleghi e il paesaggio circostante.</p></li>
             </ul>
 
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="900">
@@ -821,37 +780,29 @@
 
             <h3>Musei famosi:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Fitzwilliam Museum</b> <p>Uno dei musei più importanti della città, il Fitzwilliam Museum offre una vasta collezione di arte, libri rari e antichità. Da opere di Van Gogh a reperti egizi, c’è qualcosa per tutti.</p></li>
+                <li><b>The Round Church</b> <p>Una delle chiese più antiche di Cambridge, la Round Church è famosa per la sua architettura medievale. È un luogo ideale per scoprire la storia religiosa della città. </p></li>
             </ul>
             <br>
 
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
-            <h2>Costo stimato per 7 Giorni:</h2>
-            <p style="font-size: 20px;">€COST</p>
-            <br>
+
         {% endif %}
 
-        {% if city == "NAME" %}
-            <h2>NAME</h2>
-            <p style="font-size: 20px;">DESCRIPTION</p>
+        {% if city == "Manchester" %}
+            <h2>Manchester</h2>
+            <p style="font-size: 20px;">Manchester è una città energica e dinamica, famosa per la sua scena musicale, il calcio e la cultura industriale. Ma la città offre anche una vasta gamma di musei, gallerie e parchi verdi, rendendola una meta perfetta per tutti i tipi di viaggiatori. Con una vita notturna vibrante e una scena gastronomica in crescita, Manchester è una delle città più eccitanti del Regno Unito.
+            </p>
             
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
             <h3>Monumenti e attrazioni principali:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>John Rylands Library</b> <p>Un esempio di architettura gotica vittoriana, questa biblioteca è un tesoro di libri rari e manoscritti. È una delle biblioteche più belle del Regno Unito.</p></li>
+                <li><b>Old Trafford</b> <p>Il leggendario stadio di calcio, casa del Manchester United, è una tappa obbligata per ogni appassionato di sport.</p></li>
+                <li><b>The Northern Quarter</b> <p>Un quartiere alla moda con negozi indipendenti, caffè unici e gallerie d'arte. È il cuore creativo della città e un posto ideale per esplorare le tendenze locali.</p></li>
 
             </ul>
 
@@ -860,37 +811,27 @@
 
             <h3>Musei famosi:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Museum of Science and Industry</b> <p>Un museo che celebra il passato industriale di Manchester, con mostre interattive che vanno dalla tecnologia all’energia, fino alla storia del trasporto.</p></li>
+                <li><b>Manchester Art Gallery</b> <p>Questa galleria ospita una vasta collezione di opere d'arte, con dipinti, sculture e arti decorative che vanno dal periodo vittoriano fino ai giorni nostri.</p></li>
             </ul>
             <br>
 
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
-            
-            <h2>Costo stimato per 7 Giorni:</h2>
-            <p style="font-size: 20px;">€COST</p>
-            <br>
         {% endif %}
 
-        {% if city == "NAME" %}
-            <h2>NAME</h2>
-            <p style="font-size: 20px;">DESCRIPTION</p>
+        {% if city == "Brighton" %}
+            <h2>Brighton</h2>
+            <p style="font-size: 20px;">Brighton è una vivace città costiera che unisce il fascino della tradizione a una scena alternativa ed eclettica. Con il suo famoso molo, le spiagge e i ristoranti alla moda, Brighton è perfetta per una giornata di relax al mare, ma anche per una visita alla sua storica architettura e ai suoi musei. È una città che mescola il vecchio e il nuovo con grande stile.</p>
             
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             
             <h3>Monumenti e attrazioni principali:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Royal Pavilion</b> <p>Questo palazzo esotico, con la sua architettura indiana e asiatica, è uno dei luoghi più riconoscibili di Brighton. Originariamente costruito per il re Giorgio IV, oggi è un museo affascinante.</p></li>
+                <li><b>The Lanes</b> <p>Questo quartiere storico di Brighton è noto per le sue strette viuzze piene di negozi vintage, caffè accoglienti e gallerie d’arte. Perfetto per una passeggiata tranquilla. </p></li>
+                <li><b>Brighton Pier</b> <p>Il famoso molo di Brighton è una delle attrazioni più iconiche della città, con giostre, giochi, ristoranti e un’atmosfera vivace.</p></li>
+
 
             </ul>
 
@@ -899,21 +840,14 @@
 
             <h3>Musei famosi:</h3>
             <ul>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
-                <li><b>NAME</b> <p>LDESC</p></li>
+                <li><b>Brighton Museum & Art Gallery</b> <p>Un museo che combina arte, storia sociale e archeologia. La collezione di arte britannica e internazionale è impressionante</p></li>
+
             </ul>
             <br>
 
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
             <img src="{{ url_for('static', filename='IMGNAME.jpg') }}" alt="Roma" width="500">
-            
-            <h2>Costo stimato per 7 Giorni:</h2>
-            <p style="font-size: 20px;">€COST</p>
-            <br>
+
         {% endif %}
 
         {% if city == "NAME" %}
