@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import random
 import smtplib
-from itsdangerous import URLSafeTimedSerializer
+import os
+client_id = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
+client_secret = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
 
 # Import per autenticazione e database
 from flask_sqlalchemy import SQLAlchemy
@@ -23,7 +25,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 # ---------------------------
-# Modello Utente (Unico, con campo 'confirmed')
+# Modello Utente
 # ---------------------------
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -31,7 +33,17 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
     newsletter = db.Column(db.Boolean, default=False)
-    confirmed = db.Column(db.Boolean, default=False)  # Campo per la conferma email
+
+from flask_dance.contrib.google import make_google_blueprint, google
+
+google_bp = make_google_blueprint(
+    client_id=client_id,
+    client_secret=client_secret,
+    scope=["profile", "email"],
+    redirect_url="/google_login"  # Questa rotta gestirà il callback dopo il login
+)
+app.register_blueprint(google_bp, url_prefix="/login")
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -55,41 +67,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Accedi')
 
 # ---------------------------
-# Funzioni per email di conferma e reset password
-# ---------------------------
-def generate_confirmation_token(email):
-    serializer = URLSafeTimedSerializer(app.secret_key)
-    return serializer.dumps(email, salt='email-confirmation-salt')
-
-def confirm_token(token, expiration=3600):
-    serializer = URLSafeTimedSerializer(app.secret_key)
-    try:
-        email = serializer.loads(
-            token,
-            salt='email-confirmation-salt',
-            max_age=expiration
-        )
-    except Exception:
-        return False
-    return email
-
-def send_confirmation_email(user_email):
-    token = generate_confirmation_token(user_email)
-    confirm_url = url_for('confirm_email', token=token, _external=True)
-    subject = "Conferma il tuo account"
-    body = f"Per favore, conferma il tuo account cliccando sul link: {confirm_url}"
-    
-    sender_email = "lavoro.knod@gmail.com"  # Sostituisci con il tuo indirizzo
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(sender_email, "ibnq iene tgiy lanv")  # Usa una password per app se necessario
-        server.sendmail(sender_email, user_email, f"Subject: {subject}\n\n{body}")
-        server.quit()
-    except Exception as e:
-        print("Errore nell'invio della mail:", e)
-
-# ---------------------------
 # Rotte per autenticazione
 # ---------------------------
 @app.route('/register', methods=['GET', 'POST'])
@@ -105,29 +82,12 @@ def register():
         )
         db.session.add(new_user)
         db.session.commit()
-        
-        # Invia l'email di conferma
-        send_confirmation_email(new_user.email)
-        
-        flash("Registrazione avvenuta con successo! Controlla la tua email per confermare il tuo account.", "success")
+
+        # QUI: Puoi aggiungere la logica per inviare una notifica via email se l'utente si iscrive alla newsletter
+
+        flash("Registrazione avvenuta con successo! Ora puoi accedere.", "success")
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
-
-@app.route('/confirm/<token>')
-def confirm_email(token):
-    try:
-        email = confirm_token(token)
-    except Exception:
-        flash("Il link di conferma non è valido o è scaduto.", "danger")
-        return redirect(url_for('login'))
-    user = User.query.filter_by(email=email).first_or_404()
-    if user.confirmed:
-        flash("Account già confermato. Puoi effettuare il login.", "success")
-    else:
-        user.confirmed = True
-        db.session.commit()
-        flash("Il tuo account è stato confermato!", "success")
-    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -142,6 +102,29 @@ def login():
             flash("Credenziali non valide", "danger")
     return render_template('login.html', form=form)
 
+@app.route("/google_login")
+def google_login():
+    if not google.authorized:
+        return redirect(url_for("google.login"))
+    resp = google.get("/oauth2/v2/userinfo")
+    if not resp.ok:
+        flash("Errore durante l'accesso con Google.", "danger")
+        return redirect(url_for("login"))
+    user_info = resp.json()
+    email = user_info["email"]
+    username = user_info.get("name", email.split('@')[0])
+    # Verifica se l'utente esiste già nel database
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        # Crea un nuovo utente se non esiste
+        user = User(username=username, email=email, password=generate_password_hash(str(random.randint(100000, 999999))))
+        db.session.add(user)
+        db.session.commit()
+    login_user(user)
+    flash("Accesso con Google effettuato con successo!", "success")
+    return redirect(url_for("dashboard"))
+
+
 @app.route('/logout')
 @login_required
 def logout():
@@ -155,54 +138,6 @@ def dashboard():
     return render_template('dashboard.html')
 
 # ---------------------------
-# Rotte per il reset della password
-# ---------------------------
-@app.route('/reset_password', methods=['GET', 'POST'])
-def reset_password_request():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        user = User.query.filter_by(email=email).first()
-        if user:
-            token = generate_confirmation_token(email)  # Riutilizziamo la funzione; in futuro possiamo usare un salt diverso se necessario
-            reset_url = url_for('reset_password', token=token, _external=True)
-            subject = "Reset della password"
-            body = f"Per reimpostare la tua password, clicca sul link: {reset_url}"
-            sender_email = "tuoindirizzo@gmail.com"
-            try:
-                server = smtplib.SMTP("smtp.gmail.com", 587)
-                server.starttls()
-                server.login(sender_email, "la_tua_password_app")
-                server.sendmail(sender_email, email, f"Subject: {subject}\n\n{body}")
-                server.quit()
-                flash("Email per il reset inviata, controlla la tua casella.", "info")
-            except Exception as e:
-                flash(f"Errore nell'invio della mail: {e}", "danger")
-        else:
-            flash("Email non trovata.", "warning")
-        return redirect(url_for('login'))
-    return render_template('reset_password_request.html')
-
-@app.route('/reset_password/<token>', methods=['GET', 'POST'])
-def reset_password(token):
-    try:
-        email = confirm_token(token)
-    except Exception:
-        flash("Il link di reset non è valido o è scaduto.", "danger")
-        return redirect(url_for('reset_password_request'))
-    user = User.query.filter_by(email=email).first_or_404()
-    if request.method == 'POST':
-        new_password = request.form.get('password')
-        confirm_password = request.form.get('confirm_password')
-        if new_password != confirm_password:
-            flash("Le password non coincidono.", "warning")
-            return redirect(url_for('reset_password', token=token))
-        user.password = generate_password_hash(new_password)
-        db.session.commit()
-        flash("La password è stata reimpostata, ora puoi effettuare il login.", "success")
-        return redirect(url_for('login'))
-    return render_template('reset_password.html')
-
-# ---------------------------
 # Funzionalità esistenti (Sondaggi, Destinazioni, Contatti)
 # ---------------------------
 # Destinazioni con punteggi assegnati
@@ -212,7 +147,7 @@ destinations = {
     "Roma": 0,
     "Napoli": 0,
     "Firenze": 0,
-    # Francia
+    # #Francia
     "Parigi": 0,
     "Nizza": 0,
     "Montpellier": 0,
@@ -279,8 +214,9 @@ destinations = {
     "Delfi": 0,
     "Zagabria": 0,
     "Lubiana": 0,
+
     
-    # Locale
+    # LOCALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
     "Centro Storico": 0,
     "Mercato Locale": 0,
     "Parco Naturale": 0,
@@ -489,11 +425,6 @@ def contact():
             return f"Errore nell'invio: {str(e)}"
     
     return render_template('contact.html')
-
-# Rotta per la pagina Preferiti (placeholder)
-@app.route('/preferiti')
-def preferiti():
-    return render_template('preferiti.html')
 
 if __name__ == '__main__':
     with app.app_context():
