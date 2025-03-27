@@ -135,7 +135,7 @@
             {% if current_user.is_authenticated %}
                 <button onclick="window.location.href='/dashboard'">Gestisci account</button>
             {% else %}
-                <button onclick="window.location.href='/google_login'">Accedi con Google</button>
+                <button onclick="window.location.href='/login/google'">Accedi</button>
             {% endif %}
             {% if current_user.is_authenticated %}
                 <button onclick="window.location.href='/preferiti'">Preferiti</button>

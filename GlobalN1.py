@@ -2,17 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import random
 import smtplib
 import os
-from flask import Flask, redirect, url_for
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-import os
-
-client_id = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
-client_secret = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
-
-# Import per autenticazione e database
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
@@ -39,28 +31,17 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(150), nullable=False)
     newsletter = db.Column(db.Boolean, default=False)
 
-from flask_dance.contrib.google import make_google_blueprint, google
-
-
-app = Flask(__name__)
-app.secret_key = "IsabellaNeva"  # Cambialo con un valore sicuro
-
-google_bp = make_google_blueprint(
-    client_id=os.getenv("GOOGLE_OAUTH_CLIENT_ID"),
-    client_secret=os.getenv("GOOGLE_OAUTH_CLIENT_SECRET"),
-    redirect_to="google_login"
-)
-app.register_blueprint(google_bp, url_prefix="/login")
-
+# Configurazione Google OAuth tramite Flask-Dance
+client_id = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
+client_secret = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
 
 google_bp = make_google_blueprint(
     client_id=client_id,
     client_secret=client_secret,
     scope=["profile", "email"],
-    redirect_url="/google_login"  # Questa rotta gestirà il callback dopo il login
+    redirect_to="google_login"
 )
 app.register_blueprint(google_bp, url_prefix="/login")
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -141,7 +122,6 @@ def google_login():
     flash("Accesso con Google effettuato con successo!", "success")
     return redirect(url_for("dashboard"))
 
-
 @app.route('/logout')
 @login_required
 def logout():
@@ -164,7 +144,7 @@ destinations = {
     "Roma": 0,
     "Napoli": 0,
     "Firenze": 0,
-    # #Francia
+    # Francia
     "Parigi": 0,
     "Nizza": 0,
     "Montpellier": 0,
@@ -231,9 +211,8 @@ destinations = {
     "Delfi": 0,
     "Zagabria": 0,
     "Lubiana": 0,
-
     
-    # LOCALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+    # Locale
     "Centro Storico": 0,
     "Mercato Locale": 0,
     "Parco Naturale": 0,
