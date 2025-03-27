@@ -18,3 +18,4 @@ dnspython==2.7.0
 idna==3.10
 typing-extensions==4.12.2
 WTForms==3.2.1
+Flask-Dance==5.0.0
