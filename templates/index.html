@@ -126,13 +126,18 @@
         </div>
         <div style="background-color: yellow; color: black; border: 2px solid orange; padding: 15px; margin: 20px 0; font-size: 20px; font-weight: bold; text-align: center;">
             Attenzione: Il sito è ancora in fase di sviluppo quindi non raggiunge le sue potenzialità ed è limitato al semplice funzionamento.
-        </div>
-        <button onclick="window.location.href='/survey'">Trova la destinazione in Europa</button>
-        <button onclick="window.location.href='/localsurvey'">Trova la destinazione Locale</button>
-        <br><br/>
+        
         <div class="account-buttons">
-            <button onclick="window.location.href='/login'">Accedi</button>
-            <button onclick="window.location.href='/register'">Registrati</button>
+            {% if current_user.is_authenticated %}
+                <button onclick="window.location.href='/dashboard'">Gestisci account</button>
+            {% else %}
+                <button onclick="window.location.href='/login'">Accedi</button>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+                <button onclick="window.location.href='/preferiti'">Preferiti</button>
+            {% else %}
+                <button onclick="window.location.href='/register'">Registrati</button>
+            {% endif %}
             <button onclick="window.location.href='/about'">About Us</button>
             <button onclick="window.location.href='/contact'">Contattaci</button>
         </div>
@@ -275,8 +280,8 @@
                 .bindPopup("<b>Windermere</b><br><a href='/destination/Windermere'>Vai alla destinazione Windermere</a>");
             var markerCotswolds = L.marker([51.833031, -1.843309]).addTo(map)
                 .bindPopup("<b>Cotswolds</b><br><a href='/destination/Cotswolds'>Vai alla destinazione Cotswolds</a>");
-            var markerLondon = L.marker([51.5074456, -0.1277653]).addTo(map)
-                .bindPopup("<b>London</b><br><a href='/destination/London'>Vai alla destinazione London</a>");
+            var markerLondra = L.marker([51.5074456, -0.1277653]).addTo(map)
+                .bindPopup("<b>Londra</b><br><a href='/destination/Londra'>Vai alla destinazione Londra</a>");
             var markerLiverpool = L.marker([53.4071991, -2.99168]).addTo(map)
                 .bindPopup("<b>Liverpool</b><br><a href='/destination/Liverpool'>Vai alla destinazione Liverpool</a>");
             
