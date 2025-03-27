@@ -23,7 +23,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 # ---------------------------
-# Modello Utente
+# Modello Utente (Unico, con campo 'confirmed')
 # ---------------------------
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
