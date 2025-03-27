@@ -2,6 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import random
 import smtplib
 import os
+from flask import Flask, redirect, url_for
+from flask_dance.contrib.google import make_google_blueprint, google
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+import os
+
 client_id = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
 client_secret = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
 
@@ -35,6 +40,18 @@ class User(UserMixin, db.Model):
     newsletter = db.Column(db.Boolean, default=False)
 
 from flask_dance.contrib.google import make_google_blueprint, google
+
+
+app = Flask(__name__)
+app.secret_key = "IsabellaNeva"  # Cambialo con un valore sicuro
+
+google_bp = make_google_blueprint(
+    client_id=os.getenv("GOOGLE_OAUTH_CLIENT_ID"),
+    client_secret=os.getenv("GOOGLE_OAUTH_CLIENT_SECRET"),
+    redirect_to="google_login"
+)
+app.register_blueprint(google_bp, url_prefix="/login")
+
 
 google_bp = make_google_blueprint(
     client_id=client_id,
