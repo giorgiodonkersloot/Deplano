@@ -79,11 +79,11 @@ def send_confirmation_email(user_email):
     subject = "Conferma il tuo account"
     body = f"Per favore, conferma il tuo account cliccando sul link: {confirm_url}"
     
-    sender_email = "tuoindirizzo@gmail.com"  # Sostituisci con il tuo indirizzo
+    sender_email = "lavoro.knod@gmail.com"  # Sostituisci con il tuo indirizzo
     try:
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        server.login(sender_email, "la_tua_password_app")  # Usa una password per app se necessario
+        server.login(sender_email, "ibnq iene tgiy lanv")  # Usa una password per app se necessario
         server.sendmail(sender_email, user_email, f"Subject: {subject}\n\n{body}")
         server.quit()
     except Exception as e:
