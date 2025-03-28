@@ -32,8 +32,8 @@ class User(UserMixin, db.Model):
     newsletter = db.Column(db.Boolean, default=False)
 
 # Configurazione Google OAuth tramite Flask-Dance
-client_id = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
-client_secret = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
+client_id = os.environ.get("217946990178-iluhfa9nmvbt2r8upbrutm34vn8thng2.apps.googleusercontent.com")
+client_secret = os.environ.get("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")
 
 google_bp = make_google_blueprint(
     client_id=client_id,
