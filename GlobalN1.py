@@ -34,7 +34,7 @@ class User(UserMixin, db.Model):
 # Configurazione Google OAuth tramite Flask-Dance
 client_id = os.environ.get("217946990178-iluhfa9nmvbt2r8upbrutm34vn8thng2.apps.googleusercontent.com")
 client_secret = os.environ.get("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")
-
+#prova
 google_bp = make_google_blueprint(
     client_id=client_id,
     client_secret=client_secret,
